@@ -2,3 +2,4 @@
 proyecto/data/SuicidiosProyecto.csv
 proyecto/data/processed_data.csv
 proyecto/data/processed_data_min.csv
+proyecto/Etapa1/models/modelo_random_forest.pkl
