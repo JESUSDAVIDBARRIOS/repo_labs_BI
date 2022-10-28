@@ -1,6 +1,9 @@
 from typing import Optional
 from fastapi import FastAPI
 import pandas as pd
+from pydantic import BaseModel
+
+from DataModel import DataModel
 
 app = FastAPI()
 
@@ -19,4 +22,4 @@ def make_predictions(dataModel: DataModel):
     df.columns = dataModel.columns()
     model = load("assets/modelo.joblib")
     result = model.predict(df)
-    return result
+    return [result]
