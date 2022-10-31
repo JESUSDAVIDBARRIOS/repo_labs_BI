@@ -9,7 +9,7 @@ app = FastAPI()
 
 @app.get("/")
 def read_root():
-   return {"Hello": "World"}
+   return {"Msg": "Hi! Welcome to the College Application API. Please use the /predict endpoint to get predictions."}
 
 @app.post("/predict")
 def make_predictions(data: List[DataModel], response: Response):
