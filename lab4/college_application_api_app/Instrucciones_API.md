@@ -15,7 +15,7 @@ Si se desea hacer una predicción de la probabilidad de ser aceptado en una univ
 
 Se puede ingresar varios datos en el body de la petición, por ejemplo:
 
-{
+[{
     "gre_score": 300,
     "toefl_score": 100,
     "university_rating": 1,
@@ -32,7 +32,10 @@ Se puede ingresar varios datos en el body de la petición, por ejemplo:
     "lor": 1.5,
     "cgpa": 6.8,
     "research": 0
-}
+}]
+
+Las variables que se tienen que ingresar son las siguientes: GRE Score, TOEFL Score, University Rating, SOP, LOR, CGPA, Research.
+En caso de no ingresar alguna de estas variables no se ejecutará la predicción.
 
 Para actualizar el modelo se debe ingresar el siguiente url https://college-application-api-app.herokuapp.com/update_model y en el body de la petición de tipo ingresar los datos de la siguiente manera (Puede copiar y pegar el resultado obtenido en el literal anterior):
 
@@ -49,7 +52,7 @@ Para actualizar el modelo se debe ingresar el siguiente url https://college-appl
 
 Se puede ingresar varios datos en el body de la petición, por ejemplo:
 
-{
+[{
     "gre_score": 300,
     "toefl_score": 100,
     "university_rating": 1,
@@ -68,9 +71,9 @@ Se puede ingresar varios datos en el body de la petición, por ejemplo:
     "cgpa": 6.8,
     "research": 0,
     "chance_of_admit": 0.5
-}
+}]
 
-Si se desea correr directamente desde el dispositivo local, se debe tener instalado Python 3.8.5 y ejecutar los siguientes comandos en la terminal en el caso de no tener las librerías de fastapi instaladas:
+Si se desea correr directamente desde el dispositivo local, se debe tener instalado Python y ejecutar los siguientes comandos en la terminal en el caso de no tener las librerías de fastapi instaladas:
 
 pip install fastapi
 pip install "uvicorn[standard]"
