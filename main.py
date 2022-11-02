@@ -16,7 +16,22 @@ def make_predictions(data: List[DataModel], response: Response):
    try:
       rows = []
       for i, row in enumerate(data):
-         rows.append(row.dict())
+         filaJson = row.dict()
+         if filaJson['gre_score'] < 0 or filaJson['gre_score'] > 340:
+            raise Exception(f"GRE score must be between 0 and 340 in the row with serial no. {filaJson['serial_no']}")
+         if filaJson['toefl_score'] < 0 or filaJson['toefl_score'] > 120:
+            raise Exception(f"TOEFL score must be between 0 and 120 in the row with serial no. {filaJson['serial_no']}")
+         if filaJson['university_rating'] < 0 or filaJson['university_rating'] > 5:
+            raise Exception(f"University rating must be between 0 and 5 in the row with serial no. {filaJson['serial_no']}")
+         if filaJson['sop'] < 0 or filaJson['sop'] > 5:
+            raise Exception(f"SOP must be between 0 and 5 in the row with serial no. {filaJson['serial_no']}")
+         if filaJson['lor'] < 0 or filaJson['lor'] > 5:
+            raise Exception(f"LOR must be between 0 and 5 in the row with serial no. {filaJson['serial_no']}")
+         if filaJson['cgpa'] < 0 or filaJson['cgpa'] > 10:
+            raise Exception(f"CGPA must be between 0 and 10 in the row with serial no. {filaJson['serial_no']}")
+         if filaJson['research'] < 0 or filaJson['research'] > 1:
+            raise Exception(f"Research must be 0 or 1 in the row with serial no. {filaJson['serial_no']}")
+         rows.append(filaJson)
       df = pd.DataFrame(rows)
 
       # Change column names to title case
@@ -47,7 +62,25 @@ def update_model(data: List[DataModel], response: Response):
    try:
       rows = []
       for i, row in enumerate(data):
-         rows.append(row.dict())
+         filaJson = row.dict()
+         if filaJson['gre_score'] < 0 or filaJson['gre_score'] > 340:
+            raise Exception(f"GRE score must be between 0 and 340 in the row with serial no. {filaJson['serial_no']}")
+         if filaJson['toefl_score'] < 0 or filaJson['toefl_score'] > 120:
+            raise Exception(f"TOEFL score must be between 0 and 120 in the row with serial no. {filaJson['serial_no']}")
+         if filaJson['university_rating'] < 0 or filaJson['university_rating'] > 5:
+            raise Exception(f"University rating must be between 0 and 5 in the row with serial no. {filaJson['serial_no']}")
+         if filaJson['sop'] < 0 or filaJson['sop'] > 5:
+            raise Exception(f"SOP must be between 0 and 5 in the row with serial no. {filaJson['serial_no']}")
+         if filaJson['lor'] < 0 or filaJson['lor'] > 5:
+            raise Exception(f"LOR must be between 0 and 5 in the row with serial no. {filaJson['serial_no']}")
+         if filaJson['cgpa'] < 0 or filaJson['cgpa'] > 10:
+            raise Exception(f"CGPA must be between 0 and 10 in the row with serial no. {filaJson['serial_no']}")
+         if filaJson['research'] < 0 or filaJson['research'] > 1:
+            raise Exception(f"Research must be 0 or 1 in the row with serial no. {filaJson['serial_no']}")
+         if filaJson["admission_points"] < 0 or filaJson["admission_points"] > 150:
+            raise Exception(f"Admission points must be between 0 and 150 in the row with serial no. {filaJson['serial_no']}")
+
+         rows.append(filaJson)
       df = pd.DataFrame(rows)
 
       # Change column names to title case
