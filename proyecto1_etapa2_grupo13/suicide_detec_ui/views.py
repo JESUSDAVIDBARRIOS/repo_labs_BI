@@ -7,9 +7,8 @@ import pandas
 from nltk.corpus import stopwords
 from nltk import word_tokenize, sent_tokenize
 from nltk.stem import LancasterStemmer, WordNetLemmatizer
-from sklearn.feature_extraction.text import TfidfVectorizer
 
-vectorizer = TfidfVectorizer(max_df=1200, min_df=2, max_features=10000, ngram_range=(1,2))
+vectorizer = joblib.load('model/vectorizer.joblib')
 model = joblib.load('model/modelo_random_forest.joblib')
 
 def process_text(text):
@@ -37,20 +36,6 @@ def process_text(text):
 
     return text
 
-def vectorize_text(text):
-    tokens = {}
-
-    # For each unique word in the text, create a dict with the word as key and the word count as value
-    for word in text.split():
-        if word in tokens:
-            tokens[word] += 1
-        else:
-            tokens[word] = 1
-
-    # Create dataframe with the tokens dict
-    df = pandas.DataFrame([tokens])
-    return df
-
 def home(request):
     return render(request, 'home.html')
 
@@ -67,10 +52,12 @@ def predict(request):
         try:
 
             # Vectorizar el texto
-            text_vectorized = vectorize_text(text)
+            text_vectorized = vectorizer.transform([text])
 
-            prediccion = model.predict(text_vectorized)
-            probabilidad = model.predict_proba(text_vectorized)
+            prediccion = model.predict(text_vectorized)[0]
+            probabilidad = model.predict_proba(text_vectorized)[0][prediccion]
+            probabilidad = int(probabilidad * 100)
+
             return redirect('showPrediction', prediccion, probabilidad)
         except Exception as e:
             return redirect('error', e)
@@ -89,6 +76,11 @@ def showPrediction(request, prediction, probability):
     precision = float(model_metrics['precision']) * 100
     recall = float(model_metrics['recall']) * 100
     f1_score = float(model_metrics['f1']) * 100
+
+    if prediction == 0:
+        prediction = 'Sin riesgo de suicidio'
+    else:
+        prediction = 'Riesgo de suicidio'
 
     context = {
         'accuracy': accuracy,
