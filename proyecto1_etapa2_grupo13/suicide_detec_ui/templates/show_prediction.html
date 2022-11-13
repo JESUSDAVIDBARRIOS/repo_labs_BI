@@ -1,0 +1,17 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<div class="container">
+    <h5>La predicción realizada para el texto ingresado es: {{prediction}}</h5>
+    <p>Este resultado se da con un <b>{{probability}} % de probabilidad.</b></p>
+
+    <h6>Métricas del modelo utilizado para realizar la predicción: </h6>
+    <ul>
+        <li>Accuracy: <b>{{accuracy |floatformat:2}} %</b></li>
+        <li>Precision: <b>{{precision |floatformat:2}} %</b></li>
+        <li>Recall: <b>{{recall |floatformat:2}} %</b></li>
+        <li>F1 Score: <b>{{f1_score |floatformat:2}} %</b></li>
+    </ul>
+    
+    <a href="{% url 'home' %}" class="btn btn-dark mt-4"><- Volver al inicio</a>
+{% endblock content %} 
