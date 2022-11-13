@@ -1,0 +1,12 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<div class="container">
+    <p>Ingrese el mensaje/texto que quiera probar: </p>
+    <form method="post" class="w-100">
+        {% csrf_token %}
+        <textarea class="w-100 rounded form-control" placeholder="Pegue o escriba el mensaje a probar..." name="mensaje"></textarea>
+        <button class="btn btn-dark mt-3" type="submit">Predecir</button>
+    </form>
+</div>
+{% endblock content %} 

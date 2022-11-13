@@ -1,0 +1,39 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<p class="text-center">Esta aplicación permite detectar intención de suicidio a partir de textos, mensajes o publicaciones escritas por usuarios. El trabajo de predicción se realiza a partir de un modelo de clasificación entrenado con publicaciones de <a class="font-weight-bold" href="https://www.kaggle.com/datasets/nikhileswarkomati/suicide-watch?resource=download">Reddit</a>. A continuación, escoja si quiere obtener una predicción a partir de un texto o si quiere acceder al API del modelo. Desde el API, podrá obtener predicciones de multiples datos y a su vez reentrenar el modelo.</p>
+<div class="w-full d-flex flex-wrap justify-content-around">
+    <a href="{% url 'predict' %}" class="home_link_container shadow-sm">Obtener predicción de intento de suicidio en texto</a>
+    <a class="home_link_container shadow-sm">Ver API</a>
+</div>
+<div class="my-4">
+    <h5 class="mb-3">Ejemplo de textos y predicción</h5>
+    <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Publicación</th>
+            <th scope="col">Predicción de suicidio</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">1</th>
+            <td>Ex Wife Threatening SuicideRecently I left my wife for good because she has cheated on me twice and ...</td>
+            <td>Intención de suicidio</td>
+          </tr>
+          <tr>
+            <th scope="row">2</th>
+            <td>Am I weird I don't get affected by compliments if it's coming from someone I know irl but I feel rea...</td>
+            <td>Sin intención detectada</td>
+          </tr>
+          <tr>
+            <th scope="row">3</th>
+            <td>i need helpjust help me im crying so hard</td>
+            <td>Intención de suicidio</td>
+          </tr>
+        </tbody>
+      </table>
+</div>
+
+{% endblock content %} 
